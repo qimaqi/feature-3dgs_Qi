@@ -7,7 +7,9 @@ import torch
 
 import argparse
 import os
-
+from PIL import Image
+import sklearn
+import sklearn.decomposition
 
 parser = argparse.ArgumentParser(
     description=(
@@ -68,13 +70,26 @@ def main(args: argparse.Namespace) -> None:
     for t in targets:
         print(f"Processing '{t}'...")
         img_name = t.split(os.sep)[-1].split(".")[0]
-        image = cv2.imread(t) # (1423, 1908, 3)
+        # image = cv2.imread(t) # (1423, 1908, 3)
+        # print("image", image.shape, image.min(), image.max())
+        # rgba 
+        img = Image.open(t)
+        img_np = np.array(img) / 255.
+        if img_np.shape[-1] == 4:
+            img_np = img_np[...,:3]*img_np[...,-1:] + (1.-img_np[...,-1:])
+        # go back to cv2 image
+        image = (img_np*255).astype(np.uint8)
+
+        print("image processed", image.shape, image.min(), image.max())
+
+
         if image is None:
             print(f"Could not load '{t}' as an image, skipping...")
             continue
         predictor.set_image(image)
         image_embedding_tensor = torch.tensor(predictor.get_image_embedding().cpu().numpy()[0])
         ###
+        print("embedding shape origin: ", image_embedding_tensor.shape)
         img_h, img_w, _ = image.shape
         _, fea_h, fea_w = image_embedding_tensor.shape
         cropped_h = int(fea_w / img_w * img_h + 0.5)
@@ -82,6 +97,39 @@ def main(args: argparse.Namespace) -> None:
         print("embedding shape: ", image_embedding_tensor.shape)
         print("image_embedding_tensor_cropped: ", image_embedding_tensor_cropped.shape)
         torch.save(image_embedding_tensor_cropped, os.path.join(args.output, f"{img_name}_fmap_CxHxW.pt"))
+        # save feature map of sam visualization
+     
+        if pca is None:
+            print("calculate PCA based on 1st image", img_name)
+            pca = sklearn.decomposition.PCA(3, random_state=42)
+            feature_dim = image_embedding_tensor_cropped.shape[0]
+            image_embedding_tensor_cropped = image_embedding_tensor_cropped.permute(1, 2, 0).reshape(-1, feature_dim).cpu().numpy()
+
+            f_samples = image_embedding_tensor_cropped[::3] # downsample
+            transformed = pca.fit_transform(f_samples)
+            print(pca)
+            print("pca.explained_variance_ratio_", pca.explained_variance_ratio_.tolist())
+            print("pca.singular_values_", pca.singular_values_.tolist())
+            feature_pca_mean = torch.tensor(f_samples.mean(0)).float().cuda()
+            feature_pca_components = torch.tensor(pca.components_).float().cuda()
+            q1, q99 = np.percentile(transformed, [1, 99])
+            feature_pca_postprocess_sub = q1
+            feature_pca_postprocess_div = (q99 - q1)
+            print(q1, q99)
+            del f_samples
+            torch.save({"pca": pca, "feature_pca_mean": feature_pca_mean, "feature_pca_components": feature_pca_components,
+                        "feature_pca_postprocess_sub": feature_pca_postprocess_sub, "feature_pca_postprocess_div": feature_pca_postprocess_div},
+                        os.path.join(args.output, "pca_dict.pt"))
+            start = time.time()
+            vis_feature = (fmap.permute(0, 2, 3, 1).reshape(-1, fmap.shape[1]) - feature_pca_mean[None, :]) @ feature_pca_components.T
+            vis_feature = (vis_feature - feature_pca_postprocess_sub) / feature_pca_postprocess_div
+            vis_feature = vis_feature.clamp(0.0, 1.0).float().reshape((fmap.shape[2], fmap.shape[3], 3)).cpu()
+            Image.fromarray((vis_feature.cpu().numpy() * 255).astype(np.uint8)).save(os.path.join(outdir, outname + "_feature_vis.png"))
+            #print(time.time() - start)
+            #print("done imgsave")
+
+            fmap = fmap[0]  # [512, h, w]
+            fmap = fmap.cpu().numpy().astype(np.float16)    
         
 
 if __name__ == "__main__":

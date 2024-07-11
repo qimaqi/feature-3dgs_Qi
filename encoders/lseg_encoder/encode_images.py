@@ -411,6 +411,7 @@ def test(args):
             if image[0].shape[-1] > w:
                 # scale_factor = w / image[0].shape[-1]
                 # print("resize", image[0].shape, "to", [int(s * scale_factor) for s in image[0].shape])
+                # TODO check why we need to resize
                 print("resize", image[0].shape, "to", (h, w))
                 image = [
                     F.interpolate(
@@ -442,7 +443,7 @@ def test(args):
         for predict, impath, img, fmap in zip(predicts, dst, image, output_features):
             # prediction mask
             # mask = utils.get_mask_pallete(predict - 1, args.dataset)
-            mask = utils.get_mask_pallete(predict - 1, 'detail')
+            mask = utils.get_mask_pallete(predict - 1, 'detail') # mask pallete is color code
             outname = os.path.splitext(impath)[0] + ".png"
             mask.save(os.path.join(outdir, outname))
 

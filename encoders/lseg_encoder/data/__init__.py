@@ -27,7 +27,15 @@ class FolderLoader(enc_ds.ADE20KSegmentation):#(torch.utils.data.Dataset):
         # self.num_class = 150  # ADE20k
 
     def __getitem__(self, index):
-        img = Image.open(self.images[index]).convert('RGB')
+        # check rgba image
+        img = Image.open(self.images[index])
+        img_np = np.array(img) / 255.
+        if img_np.shape[-1] == 4:
+            img_np = img_np[...,:3]*img_np[...,-1:] + (1.-img_np[...,-1:])
+        # go back to PIL image
+        img = Image.fromarray((img_np*255).astype(np.uint8))
+        img = img.convert('RGB')
+        # img = Image.open(self.images[index]).convert('RGB')
         if self.transform is not None:
             img = self.transform(img)
         return img, os.path.basename(self.images[index])
