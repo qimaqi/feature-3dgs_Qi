@@ -16,4 +16,8 @@ python export_image_embeddings.py --checkpoint checkpoints/sam_vit_h_4b8939.pth 
 
 
 
-python train.py -s /cluster/work/cvl/qimaqi/3dv_gaussian/feature-3dgs_Qi/data/db/drjohnson/ -m output/drjohnson -f lseg -r 0 --speedup --iterations 7000
+python train.py -s /cluster/work/cvl/qimaqi/3dv_gaussian/feature-3dgs_Qi/data/72a74e13c2424c19f2b0736dd4d8afe0/ -m output/72a74e13c2424c19f2b0736dd4d8afe0 -f lseg -r 0 --speedup --iterations 7000
+
+
+
+# https://github.com/mlfoundations/open_clip
