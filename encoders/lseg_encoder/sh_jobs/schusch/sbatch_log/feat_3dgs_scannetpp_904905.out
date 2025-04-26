@@ -1,0 +1,1160 @@
+Namespace(model='encnet', backbone='clip_vitl16_384', dataset='ignore', workers=0, base_size=520, crop_size=480, train_split='train', aux=False, se_loss=False, se_weight=0.2, batch_size=16, test_batch_size=16, no_cuda=False, seed=1, weights='demo_e200.ckpt', eval=False, export=None, acc_bn=False, test_val=False, no_val=False, module='lseg', data_path=None, scale_inv=False, widehead=True, widehead_hr=False, ignore_index=-1, label_src='default', jobname='default', strict=True, arch_option=0, block_depth=0, activation='lrelu', outdir='/srv/beegfs02/scratch/qimaqi_data/data/scannet_full/data', test_rgb_dir='/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images', resize_max=1.25, cuda=True)
+val_split_10_scene ['09c1414f1b', '0d2ee665be', '38d58a7a31', '3db0a1c8f3', '5ee7c22ba0', '5f99900f09', 'a8bf42d646', 'a980334473', 'c5439f4607', 'cc5237fd77']
+/scratch_net/schusch/qimaqi/miniconda3/envs/feature_3dgs/lib/python3.9/site-packages/pytorch_lightning/utilities/migration/migration.py:208: You have multiple `ModelCheckpoint` callback states in this checkpoint, but we found state keys that would end up colliding with each other after an upgrade, which means we can't differentiate which of your checkpoint callbacks needs which states. At least one of your `ModelCheckpoint` callbacks will not be able to reload the state.
+Lightning automatically upgraded your loaded checkpoint from v1.3.5 to v2.2.5. To apply the upgrade to your files permanently, run `python -m pytorch_lightning.utilities.upgrade_checkpoint demo_e200.ckpt`
+** Use norm [0.5, 0.5, 0.5], [0.5, 0.5, 0.5] as the mean and std **
+test rgb dir /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images
+load /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images as image directroy for FolderLoader
+self.images ['/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04434.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04439.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04443.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04448.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04452.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04456.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04460.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04465.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04470.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04474.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04478.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04483.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04488.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04492.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04497.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04501.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04505.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04510.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04514.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04519.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04523.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04524.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04536.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04537.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04543.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04553.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04554.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04560.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04566.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04571.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04575.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04579.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04584.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04588.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04593.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04597.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04602.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04606.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04611.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04615.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04620.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04624.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04629.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04633.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04637.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04642.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04646.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04651.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04655.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04660.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04664.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04669.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04673.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04678.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04682.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04686.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04691.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04695.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04700.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04704.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04709.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04713.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04718.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04722.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04727.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04731.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04736.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04740.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04744.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04749.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04753.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04758.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04762.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04767.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04771.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04776.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04780.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04785.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04789.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04793.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04799.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04801.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04814.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04816.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04817.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04818.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04829.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04830.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04831.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04840.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04841.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04843.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04850.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04855.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04858.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04864.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04868.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04873.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04877.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04881.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04886.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04890.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04895.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04899.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04904.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04908.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04913.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04917.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04922.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04926.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04930.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04935.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04939.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04944.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04948.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04954.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04957.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04961.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04966.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04971.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04975.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04980.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04984.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04988.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04993.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC04997.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05002.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05006.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05011.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05015.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05020.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05024.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05029.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05033.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05065.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05069.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05074.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05078.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05082.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05087.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05091.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05096.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05101.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05105.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05108.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05113.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05118.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05122.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05127.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05131.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05136.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05140.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05145.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05149.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05154.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05158.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05163.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05167.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05171.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05176.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05180.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05185.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05189.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05194.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05198.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05204.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05207.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05212.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05216.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05220.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05225.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05228.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05234.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05268.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05273.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05277.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05282.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05285.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05291.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05295.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05299.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05304.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05308.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05313.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05317.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05323.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05325.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05331.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05335.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05340.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05344.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05349.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05353.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05358.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05362.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05365.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05367.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05370.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05373.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05378.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05390.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05391.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05402.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05403.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05404.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05412.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05418.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05422.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05427.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05431.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05436.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05440.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05445.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05450.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05453.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05458.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05462.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05467.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05470.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05476.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05480.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05485.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05489.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05494.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05498.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05502.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05507.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05510.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05516.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05520.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05525.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05529.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05534.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05538.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05544.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05547.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05552.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05555.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05559.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05565.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05569.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05574.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05578.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05583.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05588.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05592.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05596.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05601.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05605.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05609.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05614.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05618.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05623.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05628.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05632.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05635.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05641.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05645.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05650.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05654.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05658.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05663.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05667.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05672.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05676.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05681.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05685.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05690.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05694.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05699.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05703.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05708.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05711.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05716.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05721.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05725.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05730.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05734.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05739.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05743.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05748.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05752.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05758.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05761.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05765.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05770.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05775.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05779.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05782.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05788.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05792.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05798.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05802.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05807.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05811.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05815.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05820.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05824.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05829.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05833.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05839.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05843.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05848.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05852.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05857.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05861.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05866.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05870.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05874.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05879.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05883.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05888.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05892.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05897.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05901.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05906.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05911.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05915.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05918.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05923.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05928.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05932.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05937.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05941.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05959.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05963.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05968.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05972.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05977.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05981.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05985.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05990.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC05995.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06000.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06004.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06009.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06013.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06018.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06087.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06092.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06097.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06100.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06105.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06108.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06114.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06118.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06122.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06128.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06133.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06138.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06142.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06146.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06151.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06155.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06160.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06164.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06169.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06173.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06178.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06183.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06187.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06192.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06196.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06201.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06205.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06209.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06213.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06218.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06228.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06232.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06237.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06240.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06246.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06250.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06255.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06259.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06263.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06268.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06272.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06276.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06281.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06286.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06290.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06295.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06299.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06304.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06309.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06313.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06318.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06321.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06326.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06330.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06335.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06339.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06365.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06369.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06374.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06378.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06383.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06387.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06391.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06396.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06400.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06406.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06409.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06413.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06418.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06423.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06427.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06432.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06436.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06441.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06445.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06449.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06454.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06458.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06463.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06467.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06472.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06476.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06481.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06486.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06490.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06494.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06498.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06503.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06507.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06512.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06516.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06521.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06525.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06530.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06534.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06539.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06542.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06547.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06552.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06556.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06561.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06565.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06570.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06575.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06579.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06583.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06588.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06592.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06596.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06601.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06605.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06610.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06616.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06618.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06619.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06629.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06631.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06640.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06641.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06642.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06648.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06649.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06658.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06660.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06661.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06662.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06666.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06671.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06675.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06680.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06684.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06688.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06693.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06698.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06702.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06704.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06711.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06715.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06720.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06723.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06730.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06733.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06738.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06742.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06743.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06751.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06755.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06760.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06764.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06769.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06773.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06778.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06782.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06787.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06791.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06795.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06797.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06803.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06806.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06813.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06816.JPG', '/usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images/DSC06821.JPG']
+LSegModule(
+  (net): LSegNet(
+    (clip_pretrained): CLIP(
+      (visual): VisionTransformer(
+        (conv1): Conv2d(3, 768, kernel_size=(32, 32), stride=(32, 32), bias=False)
+        (ln_pre): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (transformer): Transformer(
+          (resblocks): Sequential(
+            (0): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (2): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (3): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (4): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (5): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (6): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (7): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (8): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (9): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (10): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+            (11): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+              )
+              (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+              )
+              (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+        (ln_post): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+      (transformer): Transformer(
+        (resblocks): Sequential(
+          (0): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (2): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (3): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (5): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (6): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (7): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (8): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (9): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (10): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+          (11): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+            )
+            (ln_1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=512, out_features=2048, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=2048, out_features=512, bias=True)
+            )
+            (ln_2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+      )
+      (token_embedding): Embedding(49408, 512)
+      (ln_final): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+    )
+    (pretrained): Module(
+      (model): VisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(16, 16), stride=(16, 16))
+          (norm): Identity()
+        )
+        (pos_drop): Dropout(p=0.0, inplace=False)
+        (patch_drop): Identity()
+        (norm_pre): Identity()
+        (blocks): Sequential(
+          (0): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (1): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (2): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (3): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (4): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (5): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (6): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (7): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (8): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (9): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (10): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (11): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (12): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (13): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (14): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (15): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (16): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (17): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (18): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (19): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (20): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (21): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (22): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+          (23): Block(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): Attention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (q_norm): Identity()
+              (k_norm): Identity()
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): Identity()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (drop1): Dropout(p=0.0, inplace=False)
+              (norm): Identity()
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop2): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): Identity()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (fc_norm): Identity()
+        (head_drop): Dropout(p=0.0, inplace=False)
+        (head): Linear(in_features=1024, out_features=1000, bias=True)
+      )
+      (act_postprocess1): Sequential(
+        (0): ProjectReadout(
+          (project): Sequential(
+            (0): Linear(in_features=2048, out_features=1024, bias=True)
+            (1): GELU(approximate='none')
+          )
+        )
+        (1): Transpose()
+        (2): Unflatten(dim=2, unflattened_size=torch.Size([24, 24]))
+        (3): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+        (4): ConvTranspose2d(256, 256, kernel_size=(4, 4), stride=(4, 4))
+      )
+      (act_postprocess2): Sequential(
+        (0): ProjectReadout(
+          (project): Sequential(
+            (0): Linear(in_features=2048, out_features=1024, bias=True)
+            (1): GELU(approximate='none')
+          )
+        )
+        (1): Transpose()
+        (2): Unflatten(dim=2, unflattened_size=torch.Size([24, 24]))
+        (3): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1))
+        (4): ConvTranspose2d(512, 512, kernel_size=(2, 2), stride=(2, 2))
+      )
+      (act_postprocess3): Sequential(
+        (0): ProjectReadout(
+          (project): Sequential(
+            (0): Linear(in_features=2048, out_features=1024, bias=True)
+            (1): GELU(approximate='none')
+          )
+        )
+        (1): Transpose()
+        (2): Unflatten(dim=2, unflattened_size=torch.Size([24, 24]))
+        (3): Conv2d(1024, 1024, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (act_postprocess4): Sequential(
+        (0): ProjectReadout(
+          (project): Sequential(
+            (0): Linear(in_features=2048, out_features=1024, bias=True)
+            (1): GELU(approximate='none')
+          )
+        )
+        (1): Transpose()
+        (2): Unflatten(dim=2, unflattened_size=torch.Size([24, 24]))
+        (3): Conv2d(1024, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (4): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      )
+    )
+    (scratch): Module(
+      (layer1_rn): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (layer2_rn): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (layer3_rn): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (layer4_rn): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (refinenet1): FeatureFusionBlock_custom(
+        (out_conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+        (resConfUnit1): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (resConfUnit2): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (skip_add): FloatFunctional(
+          (activation_post_process): Identity()
+        )
+      )
+      (refinenet2): FeatureFusionBlock_custom(
+        (out_conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+        (resConfUnit1): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (resConfUnit2): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (skip_add): FloatFunctional(
+          (activation_post_process): Identity()
+        )
+      )
+      (refinenet3): FeatureFusionBlock_custom(
+        (out_conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+        (resConfUnit1): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (resConfUnit2): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (skip_add): FloatFunctional(
+          (activation_post_process): Identity()
+        )
+      )
+      (refinenet4): FeatureFusionBlock_custom(
+        (out_conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+        (resConfUnit1): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (resConfUnit2): ResidualConvUnit_custom(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activation): ReLU()
+          (skip_add): FloatFunctional(
+            (activation_post_process): Identity()
+          )
+        )
+        (skip_add): FloatFunctional(
+          (activation_post_process): Identity()
+        )
+      )
+      (head1): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1))
+      (output_conv): Sequential(
+        (0): Interpolate()
+      )
+    )
+  )
+)
+scales [0.75, 1.0, 1.25, 1.75]
+test rgb dir /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images
+outdir /srv/beegfs02/scratch/qimaqi_data/data/scannet_full/data/09c1414f1b/rgb_feature_langseg
+MultiEvalModule: base_size 520, crop_size 480
+  0%|          | 0/500 [00:00<?, ?it/s]150
+w, h = 320 240
+scales [0.75, 1.0, 1.25, 1.75]
+test rgb dir /usr/bmicnas02/data-biwi-01/qimaqi_data/workspace/iccv_2025/GS_Transformer/data/scannet_full/data/09c1414f1b/dslr/undistorted_images
+outdir /srv/beegfs02/scratch/qimaqi_data/data/scannet_full/data/09c1414f1b/rgb_feature_langseg
+torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.4045183658599854
+start make_pred
+done makepred -0.007534503936767578
+calculate PCA based on 1st image DSC04434.JPG
+PCA(n_components=3, random_state=42)
+pca.explained_variance_ratio_ [0.3482750952243805, 0.23893584311008453, 0.1338580697774887]
+pca.singular_values_ [41.181610107421875, 34.110084533691406, 25.530799865722656]
+-0.47829687625169753 0.46489535033702845
+start save
+2.6226043701171875e-06
+  0%|          | 1/500 [00:07<1:03:19,  7.61s/it]torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.391113042831421
+start make_pred
+done makepred -0.0069980621337890625
+start save
+2.384185791015625e-06
+  0%|          | 2/500 [00:14<1:01:11,  7.37s/it]torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.3979239463806152
+start make_pred
+done makepred -0.007451295852661133
+start save
+2.384185791015625e-06
+  1%|          | 3/500 [00:21<59:09,  7.14s/it]  torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.397449493408203
+start make_pred
+done makepred -0.007485151290893555
+start save
+2.86102294921875e-06
+  1%|          | 4/500 [00:28<58:48,  7.11s/it]torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.399442434310913
+start make_pred
+done makepred -0.007483243942260742
+start save
+2.384185791015625e-06
+  1%|          | 5/500 [00:35<58:40,  7.11s/it]torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.404161214828491
+start make_pred
+done makepred -0.0074956417083740234
+start save
+2.384185791015625e-06
+  1%|          | 6/500 [00:42<58:26,  7.10s/it]torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred
+done pred -2.413936138153076
+start make_pred
+done makepred -0.007077693939208984
+start save
+2.384185791015625e-06
+  1%|▏         | 7/500 [00:50<58:32,  7.12s/it]torch.Size([3, 1168, 1752]) image.shape -
+resize torch.Size([3, 1168, 1752]) to (240, 320)
+torch.Size([3, 240, 320])
+torch.Size([3, 240, 320]) image.shape
+start pred

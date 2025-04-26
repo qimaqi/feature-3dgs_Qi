@@ -45,6 +45,12 @@ class Scene:
         elif os.path.exists(os.path.join(args.source_path, "transforms_train.json")):
             print("Found transforms_train.json file, assuming Blender data set!")
             scene_info = sceneLoadTypeCallbacks["Blender"](args.source_path,  args.foundation_model, args.white_background, args.eval) 
+        elif os.path.exists(os.path.join(args.source_path, "scans", "mesh_aligned_0.05.ply")):
+            print("Found mesh_aligned_0.05.ply file, assuming ScanNetPP data set!")
+            # scene_info = sceneLoadTypeCallbacks["ScanNetPP"](args.source_path, args.foundation_model, args.eval)
+            scene_info = sceneLoadTypeCallbacks["ScanNetpp"](args.source_path, args.foundation_model, args.white_background, args.eval)
+
+
         else:
             assert False, "Could not recognize scene type!"
 

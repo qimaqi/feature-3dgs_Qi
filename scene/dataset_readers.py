@@ -23,6 +23,8 @@ from plyfile import PlyData, PlyElement
 from utils.sh_utils import SH2RGB
 from scene.gaussian_model import BasicPointCloud
 import torch
+from tqdm import tqdm
+
 
 class CameraInfo(NamedTuple):
     uid: int
@@ -296,7 +298,153 @@ def readNerfSyntheticInfo(path, foundation_model, white_background, eval, extens
                            semantic_feature_dim=semantic_feature_dim) 
     return scene_info
 
+
+def readCamerasFromTransforms_nerfstudio(path, transformsfile, depths_folder, white_background, is_test, semantic_feature_folder, extension=".png", resize=None, skip=1):
+
+    cam_infos = []
+
+    with open(transformsfile) as json_file:
+        contents = json.load(json_file)
+        focal_len_x = contents["fl_x"]
+        focal_len_y = contents["fl_y"]
+        cx = contents["cx"] 
+        cy = contents["cy"] 
+        fovx = focal2fov(focal_len_x, cx)
+        fovy = focal2fov(focal_len_y, cy)
+
+        # FovY = fovy 
+        # FovX = fovx
+        frames = contents["frames"]
+        frames = frames[::skip]
+        # raise ValueError("Frames: ", frames)
+        for idx, frame in tqdm(enumerate(frames), total=len(frames)):
+            image_path = os.path.join(path, 'dslr' ,'undistorted_images')
+            # \path.replace("nerfstudio", "undistorted_images")
+            cam_name = frame["file_path"]
+
+            # NeRF 'transform_matrix' is a camera-to-world transform
+            c2w = np.array(frame["transform_matrix"])
+            # change from OpenGL/Blender camera axes (Y up, Z back) to COLMAP (Y down, Z forward)
+            applied_transform = np.array([
+                [0,  1,  0,  0],
+                [1,  0,  0,  0],
+                [0,  0, -1,  0],
+                [0,  0,  0,  1],
+            ], dtype=float)
+            c2w = np.dot(applied_transform, c2w)
+            # get the world-to-camera transform and set R, T
+            # w2c = c2w
+            w2c = np.linalg.inv(c2w)
+            w2c[1:3] *= -1
+            R = np.transpose(w2c[:3,:3])  # R is stored transposed due to 'glm' in CUDA code
+            T = w2c[:3, 3]
+            image_path = os.path.join(image_path, cam_name)
+            image_name = Path(cam_name).stem
+    
+
+            image = Image.open(image_path)
+            # resize
+            if resize is not None:
+                # resize = [584, 876]
+                resize_img = (
+                    (resize[1], resize[0])
+                    if resize[1] > resize[0]
+                    else (resize[0], resize[1])
+                )
+
+                # resize we need to also adjust the fovx
+                # image = image.resize(resize_img, Image.Resampling.LANCZOS)
+                image = image.resize(resize_img, Image.LANCZOS)
+                resize_ratio = resize[1] / 1752
+                fx = focal_len_x * resize_ratio
+                fy = focal_len_y * resize_ratio
+                cx = cx * resize_ratio
+                cy = cy * resize_ratio
+                fovx = focal2fov(fx, cx)
+                fovy = focal2fov(fy, cy)
+
+            FovY = fovy
+            FovX = fovx
+
+            semantic_feature_path = os.path.join(semantic_feature_folder, image_name) + '_fmap_CxHxW.pt' 
+            semantic_feature_name = os.path.basename(semantic_feature_path).split(".")[0]
+            # print("semantic_feature_path: ", semantic_feature_path)
+            semantic_feature = torch.load(semantic_feature_path)
+            print("semantic_feature: ", semantic_feature.shape, "memory take", semantic_feature.element_size() * semantic_feature.nelement() / 1024 / 1024, "MB")
+
+            # depth_path = os.path.join(depths_folder, f"{image_name}.png") if depths_folder != "" else ""
+            # , depth_path=depth_path
+            # cam_infos.append(CameraInfo(uid=idx, R=R, T=T, FovY=FovY, FovX=FovX,
+            #                 image_path=image_path, image_name=image_name,
+            #                 width=cx, height=cy, depth_path=depth_path, depth_params=None, is_test=is_test))
+            # cam_infos.append(CameraInfo(uid=idx, R=R, T=T, FovY=FovY, FovX=FovX,
+            #                 image=image, image_path=image_path, image_name=image_name,
+            #                 width=cx, height=cy))
+            cam_infos.append(CameraInfo(uid=idx, R=R, T=T, FovY=FovY, FovX=FovX, image=image,
+                              image_path=image_path, image_name=image_name, width=image.size[0], height=image.size[1],
+                              semantic_feature=semantic_feature,
+                              semantic_feature_path=semantic_feature_path,
+                              semantic_feature_name=semantic_feature_name)) 
+            
+            
+    return cam_infos
+
+
+def readScanNetppInfo(path, foundation_model, white_background, eval, extension=".png" , llff_hold=8):
+    if foundation_model =='sam':
+        semantic_feature_dir = "sam_embeddings" 
+    elif foundation_model =='lseg':
+        semantic_feature_dir = "rgb_feature_langseg" 
+
+    print("Reading Training Transforms")
+    basename = os.path.basename(path)
+    lang_path = os.path.join('/srv/beegfs02/scratch/qimaqi_data/data/scannet_full/data/', basename,"feature_3dgs",'rgb_feature_langseg')
+    transform_path = os.path.join(path, "dslr", "nerfstudio", 'lang_feat_selected_imgs.json') 
+    all_cam_infos = readCamerasFromTransforms_nerfstudio(path, transform_path, depths_folder=None, white_background=white_background, is_test=False,semantic_feature_folder=lang_path, extension=extension, skip = 100, resize=[584, 876])
+    # print("Reading Test Transforms")
+    # test_cam_infos = readCamerasFromTransforms_nerfstudio(path, lang_path, depths_folder, white_background, True, extension)
+    
+    # if not eval:
+    #     train_cam_infos = all_cam_infos
+    #     test_cam_infos = []
+    # else:
+    #     train_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold != 0]
+    #     test_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % llff_hold == 0]
+
+    train_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % 10 != 0]
+    test_cam_infos = [c for idx, c in enumerate(all_cam_infos) if idx % 10 == 0]
+
+    nerf_normalization = getNerfppNorm(train_cam_infos)
+
+    ply_path = os.path.join(path, "points3d.ply")
+    if not os.path.exists(ply_path):
+        # Since this data set has no colmap data, we start with random points
+        num_pts = 100_000
+        print(f"Generating random point cloud ({num_pts})...")
+        
+        # We create random points inside the bounds of the synthetic Blender scenes
+        xyz = np.random.random((num_pts, 3)) * 2.6 - 1.3
+        shs = np.random.random((num_pts, 3)) / 255.0
+        pcd = BasicPointCloud(points=xyz, colors=SH2RGB(shs), normals=np.zeros((num_pts, 3)))
+
+        storePly(ply_path, xyz, SH2RGB(shs) * 255)
+    try:
+        pcd = fetchPly(ply_path)
+    except:
+        pcd = None
+
+    semantic_feature_dim = train_cam_infos[0].semantic_feature.shape[0]  
+    scene_info = SceneInfo(point_cloud=pcd,
+                           train_cameras=train_cam_infos,
+                           test_cameras=test_cam_infos,
+                           nerf_normalization=nerf_normalization,
+                           ply_path=ply_path,
+                           semantic_feature_dim=semantic_feature_dim) 
+    return scene_info
+
+
 sceneLoadTypeCallbacks = {
     "Colmap": readColmapSceneInfo,
-    "Blender" : readNerfSyntheticInfo
+    "Blender" : readNerfSyntheticInfo,
+    "ScanNetpp": readScanNetppInfo,
 }
